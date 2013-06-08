@@ -99,7 +99,7 @@ public class Game {
         Cell next_position = new Cell(head, direction);
         if( next_position.x > max_cells[0]-1 || next_position.y > max_cells[1]-1 ||
                 next_position.x < 0 || next_position.y < 0) {
-            //TODO gameover call
+            game_over();
         }
         if( current_food.isAt(next_position) ) {
             growth_remaining += growth_rate;
@@ -113,7 +113,7 @@ public class Game {
         }
         for( int i = 0; i < body.size(); ++i ) {
             if( next_position.equal(body.elementAt(i)) ) {
-                //TODO gameover call
+                game_over();
             }
         }
         body.add(0,next_position);
