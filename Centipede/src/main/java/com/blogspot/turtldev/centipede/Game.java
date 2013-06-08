@@ -3,6 +3,7 @@ package com.blogspot.turtldev.centipede;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Handler;
 import android.util.Log;
 
 import java.util.Random;
@@ -72,7 +73,7 @@ public class Game {
         }
         get_next_food();
         game_success = false;
-        game_running = false;
+        game_running = true;
     }
 
     void get_next_food() {
@@ -118,6 +119,9 @@ public class Game {
         body.add(0,next_position);
         head = body.elementAt(0);
 
+        if( game_running ) {
+            mHandler.postDelayed(mUpdateUITimerTask, 1000);
+        }
         panel.postInvalidate();
     }
 
@@ -142,15 +146,20 @@ public class Game {
             body.elementAt(i).draw(canvas);
         }
         current_food.draw(canvas);
-        if( game_running ) {
-            requestRedraw();
+    }
+
+    void game_over() {
+        //TODO gameover call
+        game_running = false;
+    }
+
+    private final Runnable mUpdateUITimerTask = new Runnable() {
+        public void run() {
+            // do whatever you want to change here, like:
+            step();
         }
-    }
-
-    void requestRedraw() {
-        //TODO timer then call step on condition
-    }
-
+    };
+    private final Handler mHandler = new Handler();
 }
 
 abstract class Element {
