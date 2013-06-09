@@ -28,6 +28,7 @@ public class Game {
     Direction direction;
     boolean game_running;
     boolean game_success;
+    boolean paused;
     Cell head;
     int speed;
     int cell_size;
@@ -74,6 +75,7 @@ public class Game {
                 next_direction = WEST;
         }
         get_next_food();
+        paused = false;
         game_success = false;
         game_running = true;
     }
@@ -121,7 +123,7 @@ public class Game {
         body.add(0,next_position);
         head = body.elementAt(0);
 
-        if( game_running ) {
+        if( game_running && !paused ) {
             mHandler.postDelayed(mUpdateUITimerTask, speed);
         }
         panel.postInvalidate();
@@ -142,7 +144,12 @@ public class Game {
     void draw(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
 
-        if( is_paused() ) {
+        if( !game_running ) {
+            Bitmap _scratch = BitmapFactory.decodeResource(panel.getResources(),
+                    R.drawable.ui_gameover);
+            canvas.drawBitmap(_scratch, 10, 10, null);
+        }
+        else if( is_paused() ) {
             Bitmap _scratch = BitmapFactory.decodeResource(panel.getResources(),
                     R.drawable.ui_paused);
             canvas.drawBitmap(_scratch, 10, 10, null);
@@ -161,17 +168,17 @@ public class Game {
     }
 
     boolean is_paused() {
-        return !game_running;
+        return paused;
     }
 
     void pause() {
-        game_running = false;
+        paused = true;
         mHandler.removeCallbacks(mUpdateUITimerTask);
         panel.postInvalidate();
     }
 
     void resume() {
-        game_running = true;
+        paused = false;
         mHandler.postDelayed(mUpdateUITimerTask, speed);
     }
 
