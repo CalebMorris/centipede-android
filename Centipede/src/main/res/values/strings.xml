@@ -7,5 +7,10 @@
     </string>
     <string name="hello_world" >Hello world!
     </string>
+    <string name="start_button" >Start Game
+    </string>
+    <string name="settings_button" >Settings
+    </string>
+    <string name="title_string">Centipede</string>
 
 </resources>

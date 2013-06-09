@@ -9,14 +9,13 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class MainActivity extends Activity {
+public class GameActivity extends Activity {
     DrawingPanel draw_view;
     GestureDetector gesturedetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
         draw_view = new DrawingPanel(this);
         draw_view.setBackgroundColor(Color.WHITE);
         setContentView(this.draw_view);
