@@ -1,5 +1,7 @@
 package com.blogspot.turtldev.centipede;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -140,10 +142,17 @@ public class Game {
     void draw(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
 
-        for( int i = 0; i < body.size(); ++i ) {
-            body.elementAt(i).draw(canvas);
+        if( is_paused() ) {
+            Bitmap _scratch = BitmapFactory.decodeResource(panel.getResources(),
+                    R.drawable.ui_paused);
+            canvas.drawBitmap(_scratch, 10, 10, null);
         }
-        current_food.draw(canvas);
+        else {
+            for( int i = 0; i < body.size(); ++i ) {
+                body.elementAt(i).draw(canvas);
+            }
+            current_food.draw(canvas);
+        }
     }
 
     void game_over() {
@@ -151,9 +160,14 @@ public class Game {
         game_running = false;
     }
 
+    boolean is_paused() {
+        return !game_running;
+    }
+
     void pause() {
         game_running = false;
         mHandler.removeCallbacks(mUpdateUITimerTask);
+        panel.postInvalidate();
     }
 
     void resume() {
