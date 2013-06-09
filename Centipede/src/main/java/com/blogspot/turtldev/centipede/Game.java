@@ -42,7 +42,7 @@ public class Game {
         this.panel = panel;
 
         cell_size = 8;
-        speed = 100;
+        speed = 10;
         max_cells = new int[2];
             max_cells[0] = _width/cell_size;
             max_cells[1] = _height/cell_size;
@@ -120,7 +120,7 @@ public class Game {
         head = body.elementAt(0);
 
         if( game_running ) {
-            mHandler.postDelayed(mUpdateUITimerTask, 1000);
+            mHandler.postDelayed(mUpdateUITimerTask, speed*10);
         }
         panel.postInvalidate();
     }
@@ -136,8 +136,6 @@ public class Game {
             direction_time = 2;
         }
     }
-
-    //TODO main draw
 
     void draw(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
