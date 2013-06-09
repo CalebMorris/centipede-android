@@ -42,7 +42,7 @@ public class Game {
         this.panel = panel;
 
         cell_size = 8;
-        speed = 10;
+        speed = 100;
         max_cells = new int[2];
             max_cells[0] = _width/cell_size;
             max_cells[1] = _height/cell_size;
@@ -120,7 +120,7 @@ public class Game {
         head = body.elementAt(0);
 
         if( game_running ) {
-            mHandler.postDelayed(mUpdateUITimerTask, speed*10);
+            mHandler.postDelayed(mUpdateUITimerTask, speed);
         }
         panel.postInvalidate();
     }
@@ -149,6 +149,16 @@ public class Game {
     void game_over() {
         //TODO gameover call
         game_running = false;
+    }
+
+    void pause() {
+        game_running = false;
+        mHandler.removeCallbacks(mUpdateUITimerTask);
+    }
+
+    void resume() {
+        game_running = true;
+        mHandler.postDelayed(mUpdateUITimerTask, speed);
     }
 
     private final Runnable mUpdateUITimerTask = new Runnable() {
