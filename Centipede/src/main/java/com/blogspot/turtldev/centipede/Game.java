@@ -43,7 +43,7 @@ public class Game {
 
         this.panel = panel;
 
-        cell_size = 8;
+        cell_size = 16;
         speed = 100;
         max_cells = new int[2];
             max_cells[0] = _width/cell_size;
