@@ -38,22 +38,22 @@ public class Game {
     int direction_time;
     Direction next_direction;
 
-    Game(DrawingPanel panel, int width, int height){
+    Game(DrawingPanel panel, int width, int height, int speed, int size){
         _width = width;
         _height = height;
 
         this.panel = panel;
 
-        cell_size = 16;
-        speed = 100;
+        cell_size = size;
+        this.speed = speed;
+        Log.v("game_data","size:"+size);
+        Log.v("game_data","speed:"+speed);
         max_cells = new int[2];
             max_cells[0] = _width/cell_size;
             max_cells[1] = _height/cell_size;
-        Log.v("init","w/h"+"("+_width+","+_height+")");
-        Log.v("init",""+max_cells[0]+","+max_cells[1]);
         head = new Cell(_width/cell_size/2, _height/cell_size/2, cell_size);
         body = new Vector<Cell>();
-            body.add(head);
+        body.add(head);
         growth_rate = 4;
         growth_remaining = 0;
         direction_time = 0;

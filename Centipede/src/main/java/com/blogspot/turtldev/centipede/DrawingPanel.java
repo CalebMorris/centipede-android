@@ -8,14 +8,19 @@ import android.view.SurfaceView;
 class DrawingPanel extends SurfaceView implements SurfaceHolder.Callback {
     PanelThread _thread;
     Game game;
+    int size;
+    int speed;
 
-    public DrawingPanel( Context context ) {
+    public DrawingPanel( Context context, int speed, int size ) {
         super(context);
         getHolder().addCallback(this);
+
+        this.size = size;
+        this.speed = speed;
     }
 
     public void onSizeChanged( int w, int h, int oldw, int oldh ) {
-        game = new Game( this, w, h );
+        game = new Game( this, w, h, speed, size );
         game.init();
     }
 

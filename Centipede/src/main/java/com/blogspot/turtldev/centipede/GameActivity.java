@@ -20,11 +20,19 @@ public class GameActivity extends Activity {
     DialogInterface.OnClickListener dialogClickListener;
     AlertDialog.Builder builder;
 
+    int size = 16;
+    int speed = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        draw_view = new DrawingPanel(this);
-        draw_view.setBackgroundColor(Color.WHITE);
+        Bundle extras = getIntent().getExtras();
+        if( extras != null ) {
+            size = extras.getInt("size");
+            speed = extras.getInt("speed");
+        }
+
+        draw_view = new DrawingPanel(this, speed, size);
         setContentView(this.draw_view);
 
         dialogClickListener = new DialogInterface.OnClickListener() {
