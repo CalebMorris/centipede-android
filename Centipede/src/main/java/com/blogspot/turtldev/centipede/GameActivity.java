@@ -104,7 +104,12 @@ public class GameActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        areYouSure();
+        if( this.draw_view.game.game_running ) {
+            areYouSure();
+        }
+        else {
+            finish();
+        }
     }
 
     public void areYouSure() {
