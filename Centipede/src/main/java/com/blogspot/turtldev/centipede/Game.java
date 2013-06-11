@@ -83,9 +83,11 @@ public class Game {
     void get_next_food() {
         //TODO do check if position in body
         Random rnd = new Random();
-        int first = rnd.nextInt(max_cells[0]);
-        int second = rnd.nextInt(max_cells[1]);
-        current_food = new Food(first, second, cell_size);
+        do {
+            int first = rnd.nextInt(max_cells[0]);
+            int second = rnd.nextInt(max_cells[1]);
+            current_food = new Food(first, second, cell_size);
+        } while( current_food.food_in_body(body) );
     }
 
     void init() {
@@ -199,6 +201,13 @@ abstract class Element {
         this.body_size = body_size;
     }
 
+    boolean equal( Element other ) {
+        if( this.x == other.x && this.y == other.y ) {
+            return true;
+        }
+        return false;
+    }
+
     abstract public void draw(Canvas canvas);
 }
 
@@ -234,25 +243,11 @@ class Cell extends Element {
         if( y+body_size < 0 || y-body_size >= canvas.getHeight() ) {
             return;
         }
-        //TODO Cell draw method
-
         Paint pnt = new Paint();
         pnt.setColor(Color.WHITE);
         canvas.drawRect(x*body_size, y*body_size, (x+1)*body_size, (y+1)*body_size, pnt);
     }
 
-    boolean equal( Cell other ) {
-        if( this.x == other.x && this.y == other.y ) {
-            return true;
-        }
-        return false;
-    }
-    boolean equalFromCoord( int x, int y) {
-        if( this.x == x && this.y == y ) {
-            return true;
-        }
-        return false;
-    }
 }
 
 class Food extends Element {
@@ -267,6 +262,16 @@ class Food extends Element {
         else {
             return false;
         }
+    }
+
+    boolean food_in_body( Vector<Cell> body ) {
+        for( int i = 0; i < body.size(); ++i ) {
+            if( body.elementAt(i).equal(this) ) {
+                //The food and body cell are the same position
+                return true;
+            }
+        }
+        return false;
     }
 
     public void draw(Canvas canvas) {
