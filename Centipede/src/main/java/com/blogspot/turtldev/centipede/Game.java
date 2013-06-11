@@ -165,7 +165,6 @@ public class Game {
     }
 
     void game_over() {
-        //TODO gameover call
         game_running = false;
     }
 
@@ -281,7 +280,6 @@ class Food extends Element {
         if( y+body_size < 0 || y-body_size >= canvas.getHeight() ) {
             return;
         }
-        //TODO Food draw method
         Paint pnt = new Paint();
         pnt.setColor(Color.WHITE);
         canvas.drawCircle(x*body_size+body_size/2,y*body_size+body_size/2,body_size/2, pnt);
