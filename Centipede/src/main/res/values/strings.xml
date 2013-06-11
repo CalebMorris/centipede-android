@@ -13,6 +13,12 @@
     </string>
     <string name="settings_button" >Settings
     </string>
-    <string name="title_string">Centipede</string><string name="txt_size">Size</string><string name="txt_speed">Speed</string><string name="btn_Accept">Accept</string><string name="btn_cancel">Cancel</string>
+    <string name="title_string">Centipede</string>
+    <string name="txt_size">Size</string>
+    <string name="txt_speed">Speed</string>
+    <string name="btn_Accept">Accept</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="action_pause">Pause</string>
+    <string name="action_resume">Resume</string>
 
 </resources>

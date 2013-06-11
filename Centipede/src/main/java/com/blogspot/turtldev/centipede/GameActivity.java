@@ -2,7 +2,6 @@ package com.blogspot.turtldev.centipede;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -77,28 +76,31 @@ public class GameActivity extends Activity {
         return super.onKeyDown(keycode,event);
     }
 
-    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.game, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
-            case R.id.action_main_menu:
-                areYouSure();
+            case R.id.action_test:
+                if( item.getTitle() == getString(R.string.action_pause) ) {
+                    item.setTitle(getString(R.string.action_resume));
+                    this.draw_view.game.pause();
+                }
+                else {
+                    item.setTitle(getString(R.string.action_pause));
+                    this.draw_view.game.resume();
+                }
                 return true;
             default:
                 this.draw_view.game.pause();
                 return super.onOptionsItemSelected(item);
         }
     }
-    */
 
     @Override
     public void onBackPressed() {
